@@ -1,8 +1,12 @@
 {
   "jspm": {
     "dependencies": {
+      "jquery": "github:components/jquery@^2.1.4",
       "oauth": "npm:oauth@^0.9.14",
-      "querystring": "github:jspm/nodelibs-querystring@^0.1.0"
+      "querystring": "github:jspm/nodelibs-querystring@^0.1.0",
+      "react": "npm:react@^0.14.1",
+      "react-dom": "npm:react-dom@^0.14.1",
+      "whatwg-fetch": "npm:whatwg-fetch@^0.10.0"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",

@@ -1,17 +1,39 @@
 {
   "jspm": {
     "dependencies": {
+      "cookie-parser": "npm:cookie-parser@^1.4.0",
+      "express": "npm:express@^4.13.3",
+      "express-session": "npm:express-session@^1.12.1",
       "jquery": "github:components/jquery@^2.1.4",
+      "marked": "npm:marked@^0.3.5",
       "oauth": "npm:oauth@^0.9.14",
       "querystring": "github:jspm/nodelibs-querystring@^0.1.0",
       "react": "npm:react@^0.14.1",
       "react-dom": "npm:react-dom@^0.14.1",
-      "whatwg-fetch": "npm:whatwg-fetch@^0.10.0"
+      "whatwg-fetch": "npm:whatwg-fetch@^0.10.0",
+      "withings-lib": "npm:withings-lib@^0.2.2"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
       "core-js": "npm:core-js@^1.1.4"
     }
-  }
+  },
+  "name": "withings-status",
+  "description": "My daily Withings status",
+  "version": "1.0.0",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swillis/withings-status.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swillis/withings-status/issues"
+  },
+  "homepage": "https://github.com/swillis/withings-status#readme"
 }

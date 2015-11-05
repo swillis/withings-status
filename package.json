@@ -10,8 +10,9 @@
       "querystring": "github:jspm/nodelibs-querystring@^0.1.0",
       "react": "npm:react@^0.14.1",
       "react-dom": "npm:react-dom@^0.14.1",
+      "request": "npm:request@^2.65.0",
       "whatwg-fetch": "npm:whatwg-fetch@^0.10.0",
-      "withings-lib": "npm:withings-lib@^0.2.2"
+      "withings-request": "npm:withings-request@^0.0.2"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",

@@ -1,15 +1,17 @@
 import 'whatwg-fetch';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import withingsApi from 'withings-api';
 import jquery from 'jquery';
 import marked from 'marked';
 
 var data = [
-  {author: "Pete Hunt", text: "This is one comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"}
+  {author: "Pete Hunt", text: "This is one comment", object: {
+    innerObject: "It worked!"
+  }}
 ];
 
-// Comment
 var Comment = React.createClass({
   rawMarkup: function() {
     var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
@@ -22,19 +24,20 @@ var Comment = React.createClass({
         <h2 className="commentAuthor">
           {this.props.author}
         </h2>
+        <p>{this.props.object}</p>
         <span dangerouslySetInnerHTML={this.rawMarkup()} />
       </div>
     );
   }
 });
 
-// Comment List
 var CommentList = React.createClass({
   render: function() {
     var commentNodes = this.props.data.map(function (comment) {
       return (
         <Comment author={comment.author}>
           {comment.text}
+          {comment.object}
         </Comment>
       );
     });
@@ -46,82 +49,29 @@ var CommentList = React.createClass({
   }
 });
 
-// Comment Form
 var CommentForm = React.createClass({
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var author = this.refs.author.value.trim();
-    var text = this.refs.text.value.trim();
-    if (!text || !author) {
-      return;
-    }
-    this.props.onCommentSubmit({author: author, text: text});
-    this.refs.author.value = '';
-    this.refs.text.value = '';
-    return;
-  },
   render: function() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Your name" ref="author" />
-        <input type="text" placeholder="Say something..." ref="text" />
-        <input type="submit" value="Post" />
-      </form>
+      <div className="commentForm">
+        Hello, world! I am a CommentForm.
+      </div>
     );
   }
 });
 
-// Comment Box
 var CommentBox = React.createClass({
-  // loadCommentsFromServer: function() {
-  //   $.ajax({
-  //     url: this.props.url,
-  //     dataType: 'json',
-  //     cache: false,
-  //     success: function(data) {
-  //       this.setState({data: data});
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //       console.error(this.props.url, status, err.toString());
-  //     }.bind(this)
-  //   });
-  // },
-  handleCommentSubmit: function(comment) {
-    var comments = this.state.data;
-    var newComments = comments.concat([comment]);
-    this.setState({data: newComments});
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      type: 'POST',
-      data: comment,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },
-  getInitialState: function() {
-    return {data: []};
-  },
-  componentDidMount: function() {
-    this.loadCommentsFromServer();
-    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
-  },
   render: function() {
     return (
       <div className="commentBox">
         <h1>Comments</h1>
-        <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+        <CommentList data={this.props.data} />
+        <CommentForm />
       </div>
     );
   }
 });
 
 ReactDOM.render(
-  <CommentBox url="app/results.json" pollInterval={2000} />,
+  <CommentBox data={data} />,
   document.getElementById('content')
 );

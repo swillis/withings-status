@@ -1,5 +1,4 @@
 import 'whatwg-fetch';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import withingsApi from 'withings-api';
@@ -21,39 +20,15 @@ var activityUrl = withingsApi.generateUrl({
 	access_token_secret: "9e7d5e43e2ee399c5988190cdfe67d45107b413887b152080def30184d466ec"
 });
 
-
-var test = $.getJSON( activityUrl, function(data) {
-  console.log(data);
-});
-
-// console.log(test);
-
-// var data = [
-//   {
-//     "status":0,
-//     "body":{
-//       "date":"2015-11-02",
-//       "steps":7974,
-//       "distance":7412.391,
-//       "calories":369.89,
-//       "totalcalories":2513.781,
-//       "elevation":0,
-//       "soft":2880,
-//       "moderate":1920,
-//       "intense":0,
-//       "timezone":"Europe\/London"
-//     }
-//   }
-// ];
-
-
+// Steps component
 var Steps = React.createClass({
   render: function() {
     return (
       <div className="result steps">
         <div className="value">
-          {data[0].body.calories}
+          {this.props.steps}
         </div>
+
         <div className="label">
           <span>Steps</span>
         </div>
@@ -61,59 +36,69 @@ var Steps = React.createClass({
     );
   }
 });
-//
-// var Distance = React.createClass({
-//   render: function() {
-//     return (
-//       <div className="result steps">
-//         <div className="value">
-//           <span>{data[0].body.distance}</span>
-//         </div>
-//         <div className="label">
-//           <span>Distance</span>
-//         </div>
-//       </div>
-//     );
-//   }
-// });
-//
-// var Calories = React.createClass({
-//   render: function() {
-//     return (
-//       <div className="result steps">
-//         <div className="value">
-//           <span>{data[0].body.calories}</span>
-//         </div>
-//         <div className="label">
-//           <span>Calories</span>
-//         </div>
-//       </div>
-//     );
-//   }
-// });
 
+// Distance component
+var Distance = React.createClass({
+  render: function() {
+    return (
+      <div className="result steps">
+        <div className="value">
+          <span>{this.props.distance}</span>
+        </div>
+
+        <div className="label">
+          <span>Distance</span>
+        </div>
+      </div>
+    );
+  }
+});
+
+// Calories component
+var Calories = React.createClass({
+  render: function() {
+    return (
+      <div className="result steps">
+        <div className="value">
+          <span>{this.props.calories}</span>
+        </div>
+        <div className="label">
+          <span>Calories</span>
+        </div>
+      </div>
+    );
+  }
+});
+
+// Results container
 var ResultBox = React.createClass({
   getInitialState: function() {
     return {
-      steps: ''
+      steps: '',
+      distance: '',
+      calories: ''
     };
   },
 
   componentDidMount: function() {
     $.get(this.props.source, function(result) {
-      var lastGist = result[0];
+      var urlResults = result;
       if (this.isMounted()) {
-        console.log(lastGist[0]);
         this.setState({
-
+          steps: urlResults.body.steps,
+          distance: urlResults.body.distance,
+          calories: urlResults.body.calories
         });
       }
     }.bind(this));
   },
+
   render: function() {
     return (
       <div className="result-box">
-        <Steps />
+        <Steps steps={this.state.steps} />
+        <Distance distance={this.state.distance} />
+        <Calories calories={this.state.calories} />
       </div>
     );
   }
@@ -123,32 +108,3 @@ ReactDOM.render(
   <ResultBox source={activityUrl}/>,
   document.getElementById('content')
 );
-
-// var navigationConfig = [
-//     {
-//         href: 'http://ryanclark.me',
-//         text: 'My Website'
-//     }
-// ];
-//
-// var Navigation = React.createClass({
-//     render: function () {
-//         var config = this.props.config;
-//
-//         var items = function (d) {
-//             return (
-//                   <p className="navigation__link">
-//                       { d.text }
-//                   </p>
-//                 );
-//         };
-//
-//         return (
-//             <div className="navigation">
-//                 { items }
-//             </div>
-//             );
-//     }
-// });
-//
-// ReactDOM.render(<Navigation config={ navigationConfig } />, document.body);

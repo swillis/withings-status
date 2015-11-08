@@ -4,6 +4,26 @@ import ReactDOM from 'react-dom';
 import withingsApi from 'withings-api';
 import jquery from 'jquery';
 
+// Get the date
+var today = new Date();
+
+// The Withings 'day' starts from the end of the last day I think, hence the +1
+var dd = today.getDate()-1;
+
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd='0'+dd
+}
+
+if(mm<10) {
+    mm='0'+mm
+}
+
+today = yyyy+'-'+mm+'-'+dd;
+console.log(today);
+
 // Generate the Withings API base url
 var activityUrl = withingsApi.generateUrl({
 	url: "http://wbsapi.withings.net/v2/measure",
@@ -11,7 +31,7 @@ var activityUrl = withingsApi.generateUrl({
 	parameters: {
 		action: "getactivity",
 		userid: "8680483",
-		date: "2015-11-02",
+		date: today,
 	},
 
 	consumer_key: "8536748c0d33794f647c6448f765b7682e4f820e49718153246be40bfbc683",
@@ -24,13 +44,13 @@ var activityUrl = withingsApi.generateUrl({
 var Steps = React.createClass({
   render: function() {
     return (
-      <div className="result steps">
-        <div className="value">
-          {this.props.steps}
-        </div>
-
+      <div className="result">
         <div className="label">
           <span>Steps</span>
+        </div>
+
+        <div className="value">
+          {this.props.steps}
         </div>
       </div>
     );
@@ -41,13 +61,13 @@ var Steps = React.createClass({
 var Distance = React.createClass({
   render: function() {
     return (
-      <div className="result steps">
-        <div className="value">
-          <span>{this.props.distance}</span>
-        </div>
-
+      <div className="result">
         <div className="label">
           <span>Distance</span>
+        </div>
+
+        <div className="value">
+          <span>{this.props.distance}</span>
         </div>
       </div>
     );
@@ -58,12 +78,13 @@ var Distance = React.createClass({
 var Calories = React.createClass({
   render: function() {
     return (
-      <div className="result steps">
-        <div className="value">
-          <span>{this.props.calories}</span>
-        </div>
+      <div className="result">
         <div className="label">
           <span>Calories</span>
+        </div>
+
+        <div className="value">
+          <span>{this.props.calories}</span>
         </div>
       </div>
     );

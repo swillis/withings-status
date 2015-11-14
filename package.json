@@ -9,6 +9,7 @@
       "express-session": "npm:express-session@^1.12.1",
       "gh-pages": "npm:gh-pages@^0.5.0",
       "jquery": "github:components/jquery@^2.1.4",
+      "jquery-numerator": "npm:jquery-numerator@^0.2.1",
       "marked": "npm:marked@^0.3.5",
       "normalize.css": "npm:normalize.css@^3.0.3",
       "oauth": "npm:oauth@^0.9.14",

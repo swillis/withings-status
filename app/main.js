@@ -2,10 +2,8 @@ import 'whatwg-fetch';
 import React from 'react';
 import withingsApi from 'withings-api';
 import jquery from 'jquery';
-import chartjs from 'chart.js';
-// import reactChartjs from 'react-chartjs';
-import HorizontalBarChart from 'Chart.HorizontalBar.js';
 import ReactDOM from 'react-dom';
+import jqueryNumerator from 'jquery-numerator';
 
 // Get the todays's date
 var today = new Date();
@@ -21,7 +19,9 @@ if(mm<10) {
     mm='0'+mm
 }
 
-var today = yyyy+'-'+mm+'-'+dd;
+var dateForWithings = yyyy+'-'+mm+'-'+dd;
+
+var today = dd+'.'+mm+'.'+yyyy;
 
 console.log('Today ' + today);
 
@@ -32,7 +32,7 @@ var activityUrl = withingsApi.generateUrl({
 	parameters: {
 		action: "getactivity",
 		userid: "8680483",
-		date: today,
+		date: dateForWithings,
 	},
 
 	consumer_key: "8536748c0d33794f647c6448f765b7682e4f820e49718153246be40bfbc683",
@@ -41,12 +41,17 @@ var activityUrl = withingsApi.generateUrl({
 	access_token_secret: "9e7d5e43e2ee399c5988190cdfe67d45107b413887b152080def30184d466ec"
 });
 
-var stepsGoal = 12000;
+var goal = 12000;
 
-// Steps component
+// Steps
 var Steps = React.createClass({
 
   render: function() {
+    $('.steps').numerator({
+      duration: 1000,
+      toValue: (this.props.steps),
+      delimiter: ','
+    })
 
     return (
       <div className="result">
@@ -55,20 +60,36 @@ var Steps = React.createClass({
         </div>
 
         <div className="value">
-          {this.props.steps}
+          <span className="steps">0</span>
         </div>
       </div>
     );
   }
 });
 
-// Distance component
+// Timestamp
+var TimeStamp = React.createClass({
+
+  render: function() {
+    return (
+      <span className="timestamp">Activity {this.props.date}</span>
+    );
+  }
+});
+
+// Distance
 var Distance = React.createClass({
   render: function() {
 
     var floorDistance = Math.floor(this.props.distance);
     var stepsInMeters = ((floorDistance) / (this.props.steps));
-    var distanceGoal = (Math.floor((stepsInMeters) * (stepsGoal)));
+    var distanceGoal = (Math.floor((stepsInMeters) * (goal)));
+
+    $('.distance').numerator({
+      duration: 1000,
+      toValue: floorDistance,
+      delimiter: ','
+    })
 
     return (
       <div className="result">
@@ -77,19 +98,25 @@ var Distance = React.createClass({
         </div>
 
         <div className="value">
-          <span>{floorDistance}<span className="unit">m</span></span>
+          <span className="distance">0</span><span className="unit">m</span>
         </div>
       </div>
     );
   }
 });
 
-// Calories component
+// Calories
 var Calories = React.createClass({
   render: function() {
 
     var floorTotalCalories = Math.floor(this.props.totalCalories);
     var floorCalories = Math.floor(this.props.calories);
+
+    $('.calories').numerator({
+      duration: 1000,
+      toValue: floorCalories,
+      delimiter: ','
+    })
 
     return (
       <div className="result">
@@ -97,45 +124,35 @@ var Calories = React.createClass({
           <span>Calories</span>
         </div>
 
+
         <div className="value">
-          <span>{floorCalories}<span className="unit">kcal</span></span>
+          <span className="calories">0</span><span className="unit">kcal</span>
         </div>
       </div>
     );
   }
 });
 
-console.log(activityUrl);
-
-
-var MyComponent = React.createClass({
+var ProgressMeter = React.createClass({
   render: function() {
-    var data = {
-        labels: ["January"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.5)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                data: [9000, 12000]
-            }
-        ]
+    var steps = (this.props.steps);
+    var progress = (steps / goal) * 100;
+    var progressPercentage = Math.floor(progress);
+
+    $('.progress-percent-value').numerator({
+      duration: 1000,
+      toValue: progressPercentage,
+      delimiter: ','
+    })
+
+    var divStyle = {
+      transform: 'translateX(-' + (100 - progress) + '%)'
     };
 
-    var chartOptions = {
-      showScale: false,
-      responsive: true,
-      scaleBeginAtZero: true,
-      barShowStroke : false,
-      align: 'horizontal',
-      barValueSpacing : 0,
-      barDatasetSpacing : 0
-    }
-
-    var BarChart = reactChartjs.HorizontalBar;
-
     return (
-      <BarChart className="graph" data={data} options={chartOptions} />
+      <div className="progress-meter" style={divStyle}>
+        <span className="progress-percent"><span className="progress-percent-value"></span>%</span>
+      </div>
     );
   }
 });
@@ -168,10 +185,11 @@ var ResultBox = React.createClass({
   render: function() {
     return (
       <div className="result-box">
-        <Steps steps={this.state.steps} />
-        <Distance distance={this.state.distance} steps={this.state.steps} />
+        <Steps steps={this.state.steps}/>
+        <Distance distance={this.state.distance} steps={this.state.steps}/>
         <Calories calories={this.state.calories} totalCalories={this.state.totalCalories}/>
-        <MyComponent />
+        <TimeStamp date={today}/>
+        <ProgressMeter steps={this.state.steps}/>
       </div>
     );
   }

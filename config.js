@@ -25,6 +25,7 @@ System.config({
     "express-session": "npm:express-session@1.12.1",
     "gh-pages": "npm:gh-pages@0.5.0",
     "jquery": "github:components/jquery@2.1.4",
+    "jquery-numerator": "npm:jquery-numerator@0.2.1",
     "marked": "npm:marked@0.3.5",
     "normalize.css": "npm:normalize.css@3.0.3",
     "oauth": "npm:oauth@0.9.14",
@@ -644,6 +645,12 @@ System.config({
       "events": "github:jspm/nodelibs-events@0.1.1",
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:jquery-numerator@0.2.1": {
+      "jquery": "npm:jquery@2.1.4"
+    },
+    "npm:jquery@2.1.4": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:js-base64@2.1.9": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"

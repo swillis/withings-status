@@ -1,8 +1,11 @@
 import 'whatwg-fetch';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import withingsApi from 'withings-api';
 import jquery from 'jquery';
+import chartjs from 'chart.js';
+// import reactChartjs from 'react-chartjs';
+import HorizontalBarChart from 'Chart.HorizontalBar.js';
+import ReactDOM from 'react-dom';
 
 // Get the todays's date
 var today = new Date();
@@ -54,10 +57,6 @@ var Steps = React.createClass({
         <div className="value">
           {this.props.steps}
         </div>
-
-        <div>
-          {stepsGoal}
-        </div>
       </div>
     );
   }
@@ -78,11 +77,7 @@ var Distance = React.createClass({
         </div>
 
         <div className="value">
-          <span>{floorDistance}m</span>
-        </div>
-
-        <div>
-          <span>{distanceGoal}m</span>
+          <span>{floorDistance}<span className="unit">m</span></span>
         </div>
       </div>
     );
@@ -103,18 +98,47 @@ var Calories = React.createClass({
         </div>
 
         <div className="value">
-          <span>{floorCalories}</span>
-        </div>
-
-        <div>
-          <span>{floorTotalCalories}</span>
+          <span>{floorCalories}<span className="unit">kcal</span></span>
         </div>
       </div>
     );
   }
 });
 
-console.log(activityUrl)
+console.log(activityUrl);
+
+
+var MyComponent = React.createClass({
+  render: function() {
+    var data = {
+        labels: ["January"],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.5)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                data: [9000, 12000]
+            }
+        ]
+    };
+
+    var chartOptions = {
+      showScale: false,
+      responsive: true,
+      scaleBeginAtZero: true,
+      barShowStroke : false,
+      align: 'horizontal',
+      barValueSpacing : 0,
+      barDatasetSpacing : 0
+    }
+
+    var BarChart = reactChartjs.HorizontalBar;
+
+    return (
+      <BarChart className="graph" data={data} options={chartOptions} />
+    );
+  }
+});
 
 // Results container
 var ResultBox = React.createClass({
@@ -147,10 +171,12 @@ var ResultBox = React.createClass({
         <Steps steps={this.state.steps} />
         <Distance distance={this.state.distance} steps={this.state.steps} />
         <Calories calories={this.state.calories} totalCalories={this.state.totalCalories}/>
+        <MyComponent />
       </div>
     );
   }
 });
+
 
 ReactDOM.render(
   <ResultBox source={activityUrl}/>,

@@ -43,30 +43,6 @@ var activityUrl = withingsApi.generateUrl({
 
 var goal = 12000;
 
-// Steps
-var Steps = React.createClass({
-
-  render: function() {
-    $('.steps').numerator({
-      duration: 1000,
-      toValue: (this.props.steps),
-      delimiter: ','
-    })
-
-    return (
-      <div className="result">
-        <div className="label">
-          <span>Steps</span>
-        </div>
-
-        <div className="value">
-          <span className="steps">0</span>
-        </div>
-      </div>
-    );
-  }
-});
-
 // Timestamp
 var TimeStamp = React.createClass({
 
@@ -86,7 +62,7 @@ var Distance = React.createClass({
     var distanceGoal = (Math.floor((stepsInMeters) * (goal)));
 
     $('.distance').numerator({
-      duration: 1000,
+      duration: 800,
       toValue: floorDistance,
       delimiter: ','
     })
@@ -99,6 +75,38 @@ var Distance = React.createClass({
 
         <div className="value">
           <span className="distance">0</span><span className="unit">m</span>
+        </div>
+
+        <div className="goal">
+          <span className="">Goal: {distanceGoal}</span>
+        </div>
+      </div>
+    );
+  }
+});
+
+// Steps
+var Steps = React.createClass({
+
+  render: function() {
+    $('.steps').numerator({
+      duration: 800,
+      toValue: (this.props.steps),
+      delimiter: ','
+    })
+
+    return (
+      <div className="result">
+        <div className="label">
+          <span>Steps</span>
+        </div>
+
+        <div className="value">
+          <span className="steps">0</span>
+        </div>
+
+        <div className="goal">
+          <span className="">Goal: {goal}</span>
         </div>
       </div>
     );
@@ -113,7 +121,7 @@ var Calories = React.createClass({
     var floorCalories = Math.floor(this.props.calories);
 
     $('.calories').numerator({
-      duration: 1000,
+      duration: 800,
       toValue: floorCalories,
       delimiter: ','
     })
@@ -124,9 +132,12 @@ var Calories = React.createClass({
           <span>Calories</span>
         </div>
 
-
         <div className="value">
           <span className="calories">0</span><span className="unit">kcal</span>
+        </div>
+
+        <div className="goal">
+          <span className="">Total Calories: {floorTotalCalories}</span>
         </div>
       </div>
     );
@@ -140,7 +151,7 @@ var ProgressMeter = React.createClass({
     var progressPercentage = Math.floor(progress);
 
     $('.progress-percent-value').numerator({
-      duration: 1000,
+      duration: 800,
       toValue: progressPercentage,
       delimiter: ','
     })

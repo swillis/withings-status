@@ -96,7 +96,7 @@ var Steps = React.createClass({
     })
 
     return (
-      <div className="result">
+      <div className="result primo">
         <div className="label">
           <span>Steps</span>
         </div>
@@ -137,7 +137,7 @@ var Calories = React.createClass({
         </div>
 
         <div className="goal">
-          <span className="">Total Calories: {floorTotalCalories}</span>
+          <span className="">Total calories: {floorTotalCalories}</span>
         </div>
       </div>
     );
@@ -196,8 +196,8 @@ var ResultBox = React.createClass({
   render: function() {
     return (
       <div className="result-box">
-        <Steps steps={this.state.steps}/>
         <Distance distance={this.state.distance} steps={this.state.steps}/>
+        <Steps steps={this.state.steps}/>
         <Calories calories={this.state.calories} totalCalories={this.state.totalCalories}/>
         <TimeStamp date={today}/>
         <ProgressMeter steps={this.state.steps}/>

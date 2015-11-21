@@ -10,7 +10,7 @@ body {
   display: flex;
   flex-direction: row;
   height: 100vh;
-  background: linear-gradient(#4E5562, #32373F);
+  background: radial-gradient(#4E5562, #32373F);
   color: white;
 }
 
@@ -24,20 +24,23 @@ body {
   z-index: 1;
 }
 
+.primo .value {
+  font-size: 90px;
+}
+
+.primo .label,
+.primo .goal {
+  font-size: 14px;
+}
+
 .value {
-  font-size: 72px;
+  font-size: 60px;
   font-weight: 100;
 }
 
-.label {
-  font-size: 14px;
-  font-weight: 700;
-  opacity: 0.7;
-}
-
+.label,
 .goal {
   font-size: 14px;
-  /*text-transform: uppercase;*/
   font-weight: 700;
   opacity: 0.7;
 }

@@ -78,7 +78,7 @@ var Distance = React.createClass({
         </div>
 
         <div className="goal">
-          <span className="">Goal: {distanceGoal}</span>
+          <span className="">Goal: {distanceGoal}</span><span className="small-unit">m</span>
         </div>
       </div>
     );
@@ -137,7 +137,7 @@ var Calories = React.createClass({
         </div>
 
         <div className="goal">
-          <span className="">Total calories: {floorTotalCalories}</span>
+          <span className="">Total calories: {floorTotalCalories}</span><span className="small-unit">kcal</span>
         </div>
       </div>
     );

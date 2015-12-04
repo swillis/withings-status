@@ -209,7 +209,7 @@ var ResultBox = React.createClass({
 
 ReactDOM.render(
   <ResultBox source={activityUrl}/>,
-  document.getElementById('content')
+document.getElementById('app')
 );
 
 // var yesterdayNoon = new Date(yyyy, mm, dd).getTime() / 1000 - 43200;

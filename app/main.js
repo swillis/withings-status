@@ -41,7 +41,7 @@ var activityUrl = withingsApi.generateUrl({
 	access_token_secret: "9e7d5e43e2ee399c5988190cdfe67d45107b413887b152080def30184d466ec"
 });
 
-var goal = 12000;
+var goal = 10000;
 
 // Timestamp
 var TimeStamp = React.createClass({
@@ -148,16 +148,23 @@ var ProgressMeter = React.createClass({
   render: function() {
     var steps = (this.props.steps);
     var progress = (steps / goal) * 100;
-    var progressPercentage = Math.floor(progress);
+    var progressBarPercentage = Math.floor(progress);
+
+    if (progressBarPercentage <= 100) {
+      var progressBarPosition = Math.floor(progress);
+    }
+    else {
+      var progressBarPosition = 100;
+    }
 
     $('.progress-percent-value').numerator({
       duration: 800,
-      toValue: progressPercentage,
+      toValue: progressBarPercentage,
       delimiter: ','
     })
 
     var divStyle = {
-      transform: 'translateX(-' + (100 - progress) + '%)'
+      transform: 'translateX(-' + (100 - progressBarPosition) + '%)'
     };
 
     return (

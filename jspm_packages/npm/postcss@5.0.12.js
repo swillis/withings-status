@@ -1,0 +1,1 @@
+module.exports = require("npm:postcss@5.0.12/lib/postcss");

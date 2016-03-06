@@ -1,0 +1,20 @@
+{
+  "name": "Chart.HorizontalBar.js",
+  "main": "Chart.HorizontalBar.js",
+  "version": "1.0.2d",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomsouthall/Chart.HorizontalBar.js"
+  },
+ "keywords": [
+    "Chart.js",
+    "chartjs",
+    "bar chart",
+    "horizontal bar chart",
+    "bar charts",
+    "horizontal bar charts"
+  ],
+  "dependencies": {
+    "chart.js": "^1.0.2"
+  }
+}

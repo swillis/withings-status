@@ -1,0 +1,1 @@
+module.exports = require("npm:marked@0.3.5/lib/marked");

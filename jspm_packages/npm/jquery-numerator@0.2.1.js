@@ -1,0 +1,1 @@
+module.exports = require("npm:jquery-numerator@0.2.1/jquery-numerator");

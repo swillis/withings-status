@@ -1,0 +1,1 @@
+module.exports = require("npm:elliptic@6.0.1/lib/elliptic");

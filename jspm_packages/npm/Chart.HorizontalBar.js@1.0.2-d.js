@@ -1,0 +1,1 @@
+module.exports = require("npm:Chart.HorizontalBar.js@1.0.2-d/Chart.HorizontalBar");

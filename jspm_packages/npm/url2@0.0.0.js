@@ -1,0 +1,1 @@
+module.exports = require("npm:url2@0.0.0/url2");

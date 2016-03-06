@@ -1,0 +1,1 @@
+module.exports = require("npm:wrench@1.5.8/lib/wrench");

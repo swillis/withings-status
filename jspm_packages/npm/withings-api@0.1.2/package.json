@@ -1,0 +1,22 @@
+{
+  "name": "withings-api",
+  "version": "0.1.2",
+  "description": "A javascript module to help generate OAuth signed [Withings API](http://oauth.withings.com/api) URL. The code is adapted from the [API reference](http://oauth.withings.com/api) page.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/openbiz/withings-api.git"
+  },
+  "keywords": [
+    "withings"
+  ],
+  "author": "Kenny Ki",
+  "license": "MIT",
+  "dependencies": {
+    "crypto-js": "^3.1.2-5",
+    "merge": "^1.1.3"
+  }
+}

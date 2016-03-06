@@ -1,0 +1,1 @@
+module.exports = require("npm:collections@0.2.2/collections");

@@ -1,0 +1,1 @@
+module.exports = require("npm:react-chartjs@0.6.0/index");

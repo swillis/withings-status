@@ -1,0 +1,1 @@
+module.exports = require("npm:postcss-value-parser@3.1.2/lib/index");

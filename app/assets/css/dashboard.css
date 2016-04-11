@@ -11,8 +11,24 @@ body {
   display: flex;
   flex-direction: row;
   height: 100vh;
-  background: #8527E8;
-  color: white;
+  background: white;
+  color: #202428;
+  animation: willkommen 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+@keyframes willkommen {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+@media (max-width: 1023px) {
+    .result-box {
+      flex-direction: column;
+    }
 }
 
 .result {
@@ -32,33 +48,35 @@ body {
 
 .label,
 .goal {
-  font-size: 18px;
+  text-transform: uppercase;
+  font-size: 15px;
   font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .label,
 .goal,
 .value {
-  color: #5C1BA1;
+  color: #D3D5D7;
   transition: color 0.2s;
 }
 
 .result-box:hover .result .value,
 .result-box:hover .result .label,
 .result-box:hover .result .goal {
-  color: #5C1BA1;
+  color: #D3D5D7;
 }
 
 .primo .value,
 .result-box:hover .result:hover .value {
-  color: #FFCF5B;
+  color: #202428;
 }
 
 .primo .label,
 .primo .goal,
 .result-box:hover .result:hover .label,
 .result-box:hover .result:hover .goal {
-  color: white;
+  color: #D3D5D7;
 }
 
 .unit {
@@ -67,33 +85,35 @@ body {
 }
 
 .small-unit {
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .progress-meter {
   position: absolute;
   width: 100%;
-  height: 10px;
+  height: 7px;
   left: 0;
   bottom: 0;
-  background: #FFCF5B;
+  background: #FFD32C;
   transform: translateX(-100%);
-  transition: transform 0.8s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
 .progress-percent {
   position: fixed;
   right: 0;
   bottom: 0;
-  padding: 0 0 15px;
+  padding: 0 15px 15px 0;
   font-size: 24px;
-  color: white;
+  color: #202428;
   font-weight: 900;
 }
 
 .timestamp {
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   font-weight: 700;
   position: absolute;
   width: 100%;
@@ -102,5 +122,5 @@ body {
   left: 0;
   padding: 30px;
   z-index: 1;
-  color: #5C1BA1;
+  color: #D3D5D7;
 }

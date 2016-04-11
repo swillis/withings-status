@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import React from 'react';
 import withingsApi from 'withings-api';
 import jquery from 'jquery';
@@ -23,7 +22,7 @@ var dateForWithings = yyyy+'-'+mm+'-'+dd;
 
 var today = dd+'.'+mm+'.'+yyyy;
 
-console.log('Today ' + today);
+console.log("Today's date is " + today);
 
 // Get the activity log from Withings
 var activityUrl = withingsApi.generateUrl({
@@ -48,7 +47,7 @@ var TimeStamp = React.createClass({
 
   render: function() {
     return (
-      <span className="timestamp">Activity {this.props.date}</span>
+      <span className="timestamp">Activity for {this.props.date}</span>
     );
   }
 });
@@ -62,7 +61,7 @@ var Distance = React.createClass({
     var distanceGoal = (Math.floor((stepsInMeters) * (goal)));
 
     $('.distance').numerator({
-      duration: 800,
+      duration: 500,
       toValue: floorDistance,
       delimiter: ','
     })
@@ -90,7 +89,7 @@ var Steps = React.createClass({
 
   render: function() {
     $('.steps').numerator({
-      duration: 800,
+      duration: 500,
       toValue: (this.props.steps),
       delimiter: ','
     })
@@ -121,7 +120,7 @@ var Calories = React.createClass({
     var floorCalories = Math.floor(this.props.calories);
 
     $('.calories').numerator({
-      duration: 800,
+      duration: 500,
       toValue: floorCalories,
       delimiter: ','
     })
@@ -158,7 +157,7 @@ var ProgressMeter = React.createClass({
     }
 
     $('.progress-percent-value').numerator({
-      duration: 800,
+      duration: 500,
       toValue: progressBarPercentage,
       delimiter: ','
     })
@@ -177,6 +176,8 @@ var ProgressMeter = React.createClass({
 
 // Results container
 var ResultBox = React.createClass({
+
+
   getInitialState: function() {
     return {
       steps: '0',
@@ -187,6 +188,7 @@ var ResultBox = React.createClass({
   },
 
   componentDidMount: function() {
+    // $('.result-box').fadeIn(500);
     $.get(this.props.source, function(result) {
       var urlResults = result;
       if (this.isMounted()) {
@@ -216,28 +218,5 @@ var ResultBox = React.createClass({
 
 ReactDOM.render(
   <ResultBox source={activityUrl}/>,
-document.getElementById('app')
+  document.getElementById('app')
 );
-
-// var yesterdayNoon = new Date(yyyy, mm, dd).getTime() / 1000 - 43200;
-//
-// var now = Math.floor(Date.now() / 1000);
-//
-// // Get the sleep data from Withings
-// var sleepUrl = withingsApi.generateUrl({
-// 	url: "http://wbsapi.withings.net/v2/sleep",
-//
-// 	parameters: {
-// 		action: "getsummary",
-// 		userid: "8680483",
-//     // enddate: now,
-// 		// startdate: yesterdayNoon,
-// 	},
-//
-// 	consumer_key: "8536748c0d33794f647c6448f765b7682e4f820e49718153246be40bfbc683",
-// 	consumer_secret: "2889eb3c8e43ecc9d03207219ef2e6fb52ce49d3c7b08de37294f2d390fd",
-// 	access_token: "c288268c2d2318eb62fe23ffed11038e10f122885c66367e3b26e9c429",
-// 	access_token_secret: "9e7d5e43e2ee399c5988190cdfe67d45107b413887b152080def30184d466ec"
-// });
-//
-// console.log(sleepUrl);

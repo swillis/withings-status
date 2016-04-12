@@ -43,7 +43,7 @@ body {
 
 .value {
   font-size: 90px;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .label,
@@ -81,7 +81,7 @@ body {
 
 .unit {
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .small-unit {
@@ -106,7 +106,7 @@ body {
   padding: 0 15px 15px 0;
   font-size: 24px;
   color: #202428;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .timestamp {

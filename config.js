@@ -12,6 +12,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   map: {
     "Chart.HorizontalBar.js": "npm:Chart.HorizontalBar.js@1.0.2-d",
     "autoprefixer": "npm:autoprefixer@6.1.0",

@@ -22,7 +22,7 @@ var dateForWithings = yyyy+'-'+mm+'-'+dd;
 
 var today = dd+'.'+mm+'.'+yyyy;
 
-console.log("Today's date is " + today);
+var numeratorDuration = 500;
 
 // Get the activity log from Withings
 var activityUrl = withingsApi.generateUrl({
@@ -55,13 +55,12 @@ var TimeStamp = React.createClass({
 // Distance
 var Distance = React.createClass({
   render: function() {
-
     var floorDistance = Math.floor(this.props.distance);
     var stepsInMeters = ((floorDistance) / (this.props.steps));
     var distanceGoal = (Math.floor((stepsInMeters) * (goal)));
 
     $('.distance').numerator({
-      duration: 500,
+      duration: numeratorDuration,
       toValue: floorDistance,
       delimiter: ','
     })
@@ -86,10 +85,9 @@ var Distance = React.createClass({
 
 // Steps
 var Steps = React.createClass({
-
   render: function() {
     $('.steps').numerator({
-      duration: 500,
+      duration: numeratorDuration,
       toValue: (this.props.steps),
       delimiter: ','
     })
@@ -115,12 +113,11 @@ var Steps = React.createClass({
 // Calories
 var Calories = React.createClass({
   render: function() {
-
     var floorTotalCalories = Math.floor(this.props.totalCalories);
     var floorCalories = Math.floor(this.props.calories);
 
     $('.calories').numerator({
-      duration: 500,
+      duration: numeratorDuration,
       toValue: floorCalories,
       delimiter: ','
     })
@@ -157,7 +154,7 @@ var ProgressMeter = React.createClass({
     }
 
     $('.progress-percent-value').numerator({
-      duration: 500,
+      duration: numeratorDuration,
       toValue: progressBarPercentage,
       delimiter: ','
     })
@@ -176,8 +173,6 @@ var ProgressMeter = React.createClass({
 
 // Results container
 var ResultBox = React.createClass({
-
-
   getInitialState: function() {
     return {
       steps: '0',
@@ -205,10 +200,16 @@ var ResultBox = React.createClass({
   render: function() {
     return (
       <div className="result-box">
-        <Distance distance={this.state.distance} steps={this.state.steps}/>
+        <Distance distance={this.state.distance}
+        steps={this.state.steps}/>
+
         <Steps steps={this.state.steps}/>
-        <Calories calories={this.state.calories} totalCalories={this.state.totalCalories}/>
+
+        <Calories calories={this.state.calories}
+        totalCalories={this.state.totalCalories}/>
+
         <TimeStamp date={today}/>
+
         <ProgressMeter steps={this.state.steps}/>
       </div>
     );

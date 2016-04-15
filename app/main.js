@@ -22,6 +22,8 @@ var dateForWithings = yyyy+'-'+mm+'-'+dd;
 
 var today = dd+'.'+mm+'.'+yyyy;
 
+var numeratorDuration = 500;
+
 console.log("Today's date is " + today);
 
 // Get the activity log from Withings
@@ -61,7 +63,7 @@ var Distance = React.createClass({
     var distanceGoal = (Math.floor((stepsInMeters) * (goal)));
 
     $('.distance').numerator({
-      duration: 500,
+      duration: numeratorDuration,
       toValue: floorDistance,
       delimiter: ','
     })
@@ -89,7 +91,7 @@ var Steps = React.createClass({
 
   render: function() {
     $('.steps').numerator({
-      duration: 500,
+      duration: numeratorDuration,
       toValue: (this.props.steps),
       delimiter: ','
     })
@@ -120,7 +122,7 @@ var Calories = React.createClass({
     var floorCalories = Math.floor(this.props.calories);
 
     $('.calories').numerator({
-      duration: 500,
+      duration: numeratorDuration,
       toValue: floorCalories,
       delimiter: ','
     })
@@ -157,7 +159,7 @@ var ProgressMeter = React.createClass({
     }
 
     $('.progress-percent-value').numerator({
-      duration: 500,
+      duration: numeratorDuration,
       toValue: progressBarPercentage,
       delimiter: ','
     })

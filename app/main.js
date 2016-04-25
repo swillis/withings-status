@@ -27,7 +27,6 @@ var numeratorDuration = 500;
 // Get the activity log from Withings
 var activityUrl = withingsApi.generateUrl({
 	url: "http://wbsapi.withings.net/v2/measure",
-
 	parameters: {
 		action: "getactivity",
 		userid: "8680483",
@@ -72,11 +71,13 @@ var Distance = React.createClass({
         </div>
 
         <div className="value">
-          <span className="distance">0</span><span className="unit">m</span>
+          <span className="distance">0</span>
+          <span className="unit">m</span>
         </div>
 
         <div className="goal">
-          <span className="">Goal: {distanceGoal}</span><span className="small-unit">m</span>
+          <span className="">Goal: {distanceGoal || 0}</span>
+          <span className="small-unit">m</span>
         </div>
       </div>
     );
@@ -129,11 +130,13 @@ var Calories = React.createClass({
         </div>
 
         <div className="value">
-          <span className="calories">0</span><span className="unit">kcal</span>
+          <span className="calories">0</span>
+          <span className="unit">kcal</span>
         </div>
 
         <div className="goal">
-          <span className="">Total calories: {floorTotalCalories}</span><span className="small-unit">kcal</span>
+          <span className="">Total calories: {floorTotalCalories}</span>
+          <span className="small-unit">kcal</span>
         </div>
       </div>
     );

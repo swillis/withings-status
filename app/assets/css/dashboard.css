@@ -1,7 +1,7 @@
 body {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-size: 15px;
+  font-size: 12px;
   text-rendering: optimizeLegibility;
 }
 
@@ -49,7 +49,6 @@ body {
 .label,
 .goal {
   text-transform: uppercase;
-  font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -84,10 +83,6 @@ body {
   font-weight: 800;
 }
 
-.small-unit {
-  font-size: 15px;
-}
-
 .progress-meter {
   position: absolute;
   width: 100%;
@@ -111,7 +106,6 @@ body {
 
 .timestamp {
   box-sizing: border-box;
-  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 700;

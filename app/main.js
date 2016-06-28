@@ -5,46 +5,46 @@ import ReactDOM from 'react-dom';
 import jqueryNumerator from 'jquery-numerator';
 
 // Get the todays's date
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var yyyy = today.getFullYear();
+let today = new Date();
+let dd = today.getDate();
+let mm = today.getMonth()+1; //January is 0!
+let yyyy = today.getFullYear();
 
-if(dd<10) {
-    dd='0'+dd
+if (dd<10) {
+  dd='0'+dd
 }
 
-if(mm<10) {
-    mm='0'+mm
+if (mm<10) {
+  mm='0'+mm
 }
 
 var dateForWithings = yyyy+'-'+mm+'-'+dd;
 
-var today = dd+'.'+mm+'.'+yyyy;
+var dateForApp = dd+'.'+mm+'.'+yyyy;
 
 var numeratorDuration = 500;
 
 // Get the activity log from Withings
 var activityUrl = withingsApi.generateUrl({
-	url: "http://wbsapi.withings.net/v2/measure",
+  url: "http://wbsapi.withings.net/v2/measure",
 
-	parameters: {
-		action: "getactivity",
-		userid: "8680483",
-		date: dateForWithings,
-	},
+  parameters: {
+    action: "getactivity",
+    userid: "8680483",
+    date: dateForWithings,
+  },
 
-	consumer_key: "8536748c0d33794f647c6448f765b7682e4f820e49718153246be40bfbc683",
-	consumer_secret: "2889eb3c8e43ecc9d03207219ef2e6fb52ce49d3c7b08de37294f2d390fd",
-	access_token: "c288268c2d2318eb62fe23ffed11038e10f122885c66367e3b26e9c429",
-	access_token_secret: "9e7d5e43e2ee399c5988190cdfe67d45107b413887b152080def30184d466ec"
+  consumer_key: "8536748c0d33794f647c6448f765b7682e4f820e49718153246be40bfbc683",
+  consumer_secret: "2889eb3c8e43ecc9d03207219ef2e6fb52ce49d3c7b08de37294f2d390fd",
+  access_token: "c288268c2d2318eb62fe23ffed11038e10f122885c66367e3b26e9c429",
+  access_token_secret: "9e7d5e43e2ee399c5988190cdfe67d45107b413887b152080def30184d466ec"
 });
 
+// Have to hard code goal!!
 var goal = 10000;
 
 // Timestamp
 var TimeStamp = React.createClass({
-
   render: function() {
     return (
       <span className="timestamp">Activity for {this.props.date}</span>
@@ -153,14 +153,31 @@ var ProgressMeter = React.createClass({
       var progressBarPosition = 100;
     }
 
+    // Set progress bar colour
+    const orange = '#F1743E';
+    const yellow = '#FFD32C';
+    const green = '#39F167';
+
+    let progressBarColour = green;
+
+    if (progressBarPercentage < 33) {
+      progressBarColour = orange;
+    }
+    else if (progressBarPercentage < 66) {
+      progressBarColour = yellow;
+    }
+
+    // Numeratorrr
     $('.progress-percent-value').numerator({
       duration: numeratorDuration,
       toValue: progressBarPercentage,
       delimiter: ','
     })
 
+    // Progress bar stylez
     var divStyle = {
-      transform: 'translateX(-' + (100 - progressBarPosition) + '%)'
+      transform: 'translateX(-' + (100 - progressBarPosition) + '%)',
+      'backgroundColor': progressBarColour
     };
 
     return (
@@ -208,7 +225,7 @@ var ResultBox = React.createClass({
         <Calories calories={this.state.calories}
         totalCalories={this.state.totalCalories}/>
 
-        <TimeStamp date={today}/>
+      <TimeStamp date={dateForApp}/>
 
         <ProgressMeter steps={this.state.steps}/>
       </div>

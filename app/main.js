@@ -3,6 +3,7 @@ import withingsApi from 'withings-api';
 import jquery from 'jquery';
 import ReactDOM from 'react-dom';
 import jqueryNumerator from 'jquery-numerator';
+import _ from 'lodash';
 
 // Get the todays's date
 let today = new Date();
@@ -13,15 +14,12 @@ let yyyy = today.getFullYear();
 if (dd<10) {
   dd='0'+dd
 }
-
 if (mm<10) {
   mm='0'+mm
 }
 
 var dateForWithings = yyyy+'-'+mm+'-'+dd;
-
 var dateForApp = dd+'.'+mm+'.'+yyyy;
-
 var numeratorDuration = 500;
 
 // Get the activity log from Withings
@@ -200,11 +198,11 @@ var ResultBox = React.createClass({
   },
 
   componentDidMount: function() {
-    // $('.result-box').fadeIn(500);
     $.get(this.props.source, function(result) {
       var urlResults = result;
       if (this.isMounted()) {
         this.setState({
+          body: urlResults.body,
           steps: urlResults.body.steps,
           distance: urlResults.body.distance,
           calories: urlResults.body.calories,
@@ -216,7 +214,7 @@ var ResultBox = React.createClass({
 
   render: function() {
     return (
-      <div className="result-box">
+      <div className="page">
         <Distance distance={this.state.distance}
         steps={this.state.steps}/>
 
@@ -225,7 +223,7 @@ var ResultBox = React.createClass({
         <Calories calories={this.state.calories}
         totalCalories={this.state.totalCalories}/>
 
-      <TimeStamp date={dateForApp}/>
+        <TimeStamp date={dateForApp}/>
 
         <ProgressMeter steps={this.state.steps}/>
       </div>
@@ -233,8 +231,72 @@ var ResultBox = React.createClass({
   }
 });
 
+var WaitingMessage = React.createClass({
+  render: function() {
+    return (
+      <div className="page">
+        <div className="error-message">
+          <span className="error-message__waiting">Think real hard&hellip;</span>
+        </div>
+      </div>
+    );
+  }
+});
+
+
+var ErrorMessage = React.createClass({
+  render: function() {
+    return (
+      <div className="page">
+        <div className="error-message">
+          <span className="error-message__emoji">😬</span>
+          <span className="error-message__title">Ruh roh</span>
+          <span className="error-message__copy">Couldn’t get your activity from the Withings API. You probs just need to make sure your watch is synced up and that you’ve got internet.</span>
+          <a href="." className="error-message__link">Try reloading the page</a>
+        </div>
+      </div>
+    );
+  }
+});
+
+var Page = React.createClass({
+
+  getInitialState: function() {
+    return {
+        body: {},
+    };
+  },
+
+  componentDidMount: function() {
+    $.get(this.props.source, function(result) {
+      var urlResults = result;
+      if (this.isMounted()) {
+        this.setState({
+          body: urlResults.body,
+        });
+      }
+    }.bind(this));
+  },
+
+  render: function() {
+    if (_.isEmpty(this.state.body)) {
+      return (
+        <div>
+          <WaitingMessage />
+        </div>
+      )
+    }
+    else {
+      return (
+        <div>
+          <ResultBox source={activityUrl}/>
+        </div>
+      );
+    }
+  }
+});
 
 ReactDOM.render(
-  <ResultBox source={activityUrl}/>,
+  <Page source={activityUrl}/>,
   document.getElementById('app')
 );

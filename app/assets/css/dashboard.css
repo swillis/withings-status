@@ -1,11 +1,11 @@
 body {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'niveau-grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 12px;
   text-rendering: optimizeLegibility;
 }
 
-.result-box {
+.page {
   position: relative;
   margin: 0 auto;
   display: flex;
@@ -14,6 +14,69 @@ body {
   background: white;
   color: #202428;
   animation: willkommen 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.error-message {
+  align-self: center;
+  flex: 1;
+  text-align: center;
+}
+
+.error-message span {
+  display: block;
+  line-height: 1.4em;
+}
+
+.error-message__emoji {
+  font-size: 36px;
+}
+
+.error-message__title {
+  font-size: 24px;
+  color: #202428;
+  font-weight: 900;
+}
+
+.error-message__copy {
+  font-size: 18px;
+  color: #b1b1b1;
+  width: 540px;
+  margin: 12px auto 12px;
+}
+
+.error-message__waiting {
+  font-size: 18px;
+  font-weight: 900;
+  animation: waiting 0.5s linear infinite;
+}
+
+@keyframes waiting {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.3;
+    }
+}
+
+a.error-message__link {
+  color: #3498db;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 5px;
+  margin-top: 12px;
+  display: inline-block;
+  border: 1px solid #3498db;
+  font-size: 14px;
+  transition: background-color .1s, color .1s;
+}
+
+a.error-message__link:hover {
+  background-color: #3498db;
+  color: white;
 }
 
 @keyframes willkommen {
@@ -26,7 +89,7 @@ body {
 }
 
 @media (max-width: 1023px) {
-    .result-box {
+    .page {
       flex-direction: column;
     }
 }
@@ -43,7 +106,7 @@ body {
 
 .value {
   font-size: 90px;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .label,
@@ -60,21 +123,21 @@ body {
   transition: color 0.2s;
 }
 
-.result-box:hover .result .value,
-.result-box:hover .result .label,
-.result-box:hover .result .goal {
+.page:hover .result .value,
+.page:hover .result .label,
+.page:hover .result .goal {
   color: #D3D5D7;
 }
 
 .primo .value,
-.result-box:hover .result:hover .value {
+.page:hover .result:hover .value {
   color: #202428;
 }
 
 .primo .label,
 .primo .goal,
-.result-box:hover .result:hover .label,
-.result-box:hover .result:hover .goal {
+.page:hover .result:hover .label,
+.page:hover .result:hover .goal {
   color: #D3D5D7;
 }
 

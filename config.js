@@ -26,6 +26,7 @@ System.config({
     "gh-pages": "npm:gh-pages@0.8.0",
     "jquery": "github:components/jquery@2.1.4",
     "jquery-numerator": "npm:jquery-numerator@0.2.1",
+    "lodash": "npm:lodash@4.13.1",
     "marked": "npm:marked@0.3.5",
     "normalize.css": "npm:normalize.css@3.0.3",
     "oauth": "npm:oauth@0.9.14",

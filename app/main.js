@@ -144,6 +144,7 @@ var ProgressMeter = React.createClass({
     var progress = (steps / goal) * 100;
     var progressBarPercentage = Math.floor(progress);
 
+    // Check if goal has been exceeded
     if (progressBarPercentage <= 100) {
       var progressBarPosition = Math.floor(progress);
     }
